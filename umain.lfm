@@ -35,9 +35,9 @@ object fMain: TfMain
     Height = 364
     Top = 0
     Width = 522
-    ActivePage = TabSheet4
+    ActivePage = TabSheet1
     Align = alClient
-    TabIndex = 4
+    TabIndex = 0
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'RESULT'
@@ -68,9 +68,9 @@ object fMain: TfMain
             Width = 100
           end>
         Items.LazData = {
-          5F00000001000000FFFFFFFFFFFFFFFFFFFFFFFF030000000100000031140000
-          00636F6E7374616E74696E2E6D6172696E2E707374060000003339362E343810
-          000000323031352E30382E33312031343A3530FFFFFFFFFFFFFFFFFFFFFFFF
+          5B00000001000000FFFFFFFFFFFFFFFFFFFFFFFF030000000100000031100000
+          0073746566616E2E61726869702E707374060000003339362E34381000000032
+          3031352E30382E33312031343A3530FFFFFFFFFFFFFFFFFFFFFFFF
         }
         ReadOnly = True
         RowSelect = True
@@ -125,14 +125,14 @@ object fMain: TfMain
         Height = 23
         Top = 15
         Width = 368
-        Directory = '\\sanab8.akerbraila.ro\k$\pst-uri\'
+        Directory = 'C:\TEMP\'
         ShowHidden = False
         ButtonWidth = 23
         NumGlyphs = 1
         Anchors = [akTop, akLeft, akRight]
         MaxLength = 0
         TabOrder = 0
-        Text = '\\sanab8.akerbraila.ro\k$\pst-uri\'
+        Text = 'C:\TEMP\'
       end
       object Label2: TLabel
         Left = 8
@@ -264,7 +264,7 @@ object fMain: TfMain
         Top = 16
         Width = 201
         TabOrder = 2
-        Text = 'smtp@osv.onmicrosoft.com'
+        Text = 'email_sender'
       end
       object SmtpServerName: TEdit
         Left = 136
@@ -272,7 +272,7 @@ object fMain: TfMain
         Top = 70
         Width = 201
         TabOrder = 3
-        Text = 'sanab59.akerbraila.ro'
+        Text = 'email_server'
       end
       object SmtpUsername: TEdit
         Left = 136
@@ -280,7 +280,7 @@ object fMain: TfMain
         Top = 205
         Width = 201
         TabOrder = 4
-        Text = 'noreply@vard.com'
+        Text = 'noreply@email.loc'
       end
       object SmtpPassword: TEdit
         Left = 136
@@ -305,7 +305,7 @@ object fMain: TfMain
         Width = 202
         MaxValue = 65000
         TabOrder = 7
-        Value = 591
+        Value = 25
       end
       object SmtpConnectionTimeout: TSpinEdit
         Left = 136
@@ -337,7 +337,7 @@ object fMain: TfMain
         Width = 368
         Anchors = [akTop, akLeft, akRight, akBottom]
         Lines.Strings = (
-          'stefan.arhip@vard.com'
+          'stefan.arhip@email.loc'
         )
         TabOrder = 0
       end

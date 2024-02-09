@@ -85,23 +85,23 @@ begin
   FilesCount := 0;
   FilesSize := 0;
   if FindFirst(Path + '*.*', faAnyFile - faDirectory, sR) = 0 then
-    try
-      repeat
-        with ListView1.Items.Add do
-        begin
-          //sL.Add(Path+ sR.Name);
-          Caption := IntToStr(ListView1.Items.Count);
-          SubItems.Add(sR.Name);
-          SubItems.Add(Format('%f', [sR.Size / 1024 / 1024]));
-          SubItems.Add(FormatDateTime('yyyy-mm-dd hh:nn',
-            FileDateToDateTime(sR.Time)));
-        end;
-        Inc(FilesCount);
-        FilesSize := FilesSize + sR.Size;
-      until FindNext(sR) <> 0;
-    finally
-      FindClose(sR);
-    end;
+  try
+    repeat
+      with ListView1.Items.Add do
+      begin
+        //sL.Add(Path+ sR.Name);
+        Caption := IntToStr(ListView1.Items.Count);
+        SubItems.Add(sR.Name);
+        SubItems.Add(Format('%f', [sR.Size / 1024 / 1024]));
+        SubItems.Add(FormatDateTime('yyyy-mm-dd hh:nn',
+          FileDateToDateTime(sR.Time)));
+      end;
+      Inc(FilesCount);
+      FilesSize := FilesSize + sR.Size;
+    until FindNext(sR) <> 0;
+  finally
+    FindClose(sR);
+  end;
 
   StatusBar1.Panels[0].Text := Format('%d files', [FilesCount]);
   StatusBar1.Panels[1].Text := Format('%f MB', [FilesSize / 1024 / 1024]);
@@ -111,8 +111,8 @@ end;
 procedure TfMain.FormCreate(Sender: TObject);
 begin
   fMain.laLazarus.Caption := 'Lazarus: ' + lcl_version;
-  fMain.laFPC.Caption:= 'FPC: '+ {$I %FPCVersion%};
-  fMain.laCPUTarget.Caption:= 'CPU Target: '+ {$I %FPCTarget%};
+  fMain.laFPC.Caption := 'FPC: ' + {$I %FPCVersion%};
+  fMain.laCPUTarget.Caption := 'CPU Target: ' + {$I %FPCTarget%};
 
   PageControl1.PageIndex := 0;
   ListView1.Items.Clear;
@@ -142,46 +142,41 @@ const
   Cdo = 'http://schemas.microsoft.com/cdo/configuration/';
 var
   Email, _EmailBody: olevariant;
-  _Style: ShortString;
+  _Style: shortstring;
   i, j: integer;
 begin
   if not tbEmail.Enabled then
     Exit;
 
   Email := ComObj.CreateOleObject('CDO.Message');
-  Email.From := ShortString(SmtpSender.Text);
-  Email.&To:= '';
-  For i:= 1 To meRecipients.Lines.Count Do
-    Email.&To:= Email.&To+ ShortString(meRecipients.Lines[i- 1]+ ';');
+  Email.From := shortstring(SmtpSender.Text);
+  Email.&To := '';
+  for i := 1 to meRecipients.Lines.Count do
+    Email.&To := Email.&To + shortstring(meRecipients.Lines[i - 1] + ';');
   //Email.CC:= '';
   //Email.BCC:= '';
-  Email.Subject := ShortString(Format('%s - [%d files, %f MB]',
+  Email.Subject := shortstring(Format('%s - [%d files, %f MB]',
     [fMain.Caption, FilesCount, FilesSize / 1024 / 1024]));
 
   _EmailBody := '<html><head>' + '<Style Type="Text/Css">'#13 +
-    '<!--'#13 + 'table,th,td {'#13 +
-    'border:1px solid #000000;'#13 +
+    '<!--'#13 + 'table,th,td {'#13 + 'border:1px solid #000000;'#13 +
     'border-collapse: collapse;'#13 + 'padding:2px;'#13 +
-    'text-align:left;'#13 + 'width:1px;'#13 +
-    'white-space:nowrap;}'#13 +
-    'p.title{Font-Family:Arial;Font-Size:10pt;Font-Weight:900;Color:#ff0000}'#13
-    + 'td.title{Font-Family:Arial;Font-Size:10pt;Font-Weight:900;Color:#000000;background-color:#99bfff;text-align:center}'#13 +
-    'td.odd{Font-Family:Arial;Font-Size:10pt;Font-Weight:000;Color:#000000;background-color:#d5faff;text-align:right}'#13 +
-    'td.even{Font-Family:Arial;Font-Size:10pt;Font-Weight:000;Color:#000000;background-color:#fffff;text-align:right}'#13 +
-    'p.legend{Font-Family:Arial;Font-Size:10pt;Font-Weight:000;font-style:italic;Color:#cccccc}'#13 + '-->'#13 + '</Style>'#13 +
-    '</head><body>'#13;
+    'text-align:left;'#13 + 'width:1px;'#13 + 'white-space:nowrap;}'#13 +
+    'p.title{Font-Family:Arial;Font-Size:10pt;Font-Weight:900;Color:#ff0000}'#13 +
+    'td.title{Font-Family:Arial;Font-Size:10pt;Font-Weight:900;Color:#000000;background-color:#99bfff;text-align:center}'#13
+    + 'td.odd{Font-Family:Arial;Font-Size:10pt;Font-Weight:000;Color:#000000;background-color:#d5faff;text-align:right}'#13 + 'td.even{Font-Family:Arial;Font-Size:10pt;Font-Weight:000;Color:#000000;background-color:#fffff;text-align:right}'#13 + 'p.legend{Font-Family:Arial;Font-Size:10pt;Font-Weight:000;font-style:italic;Color:#cccccc}'#13 + '-->'#13 + '</Style>'#13 + '</head><body>'#13;
 
-  _EmailBody := _EmailBody + ShortString(
+  _EmailBody := _EmailBody + shortstring(
     Format('<b><p class="title">%d files with size %f MB in folder <b>%s</b></p></b>'#13,
-    [FilesCount,
-    FilesSize / 1024 / 1024, MonitorizedFolder.Text]));
-  _EmailBody := _EmailBody + ShortString('<table width=100%>'#13);
+    [FilesCount, FilesSize / 1024 / 1024, MonitorizedFolder.Text]));
+  _EmailBody := _EmailBody + shortstring('<table width=100%>'#13);
 
-  _EmailBody := _EmailBody + ShortString('<tr>'#13);
+  _EmailBody := _EmailBody + shortstring('<tr>'#13);
   for j := 1 to ListView1.ColumnCount do
-    _EmailBody := _EmailBody + ShortString(Format('<td class="title">%s</td>'#13,
+    _EmailBody := _EmailBody +
+      shortstring(Format('<td class="title">%s</td>'#13,
       [ListView1.Column[j - 1].Caption]));
-  _EmailBody := _EmailBody + ShortString('</tr>'#13);
+  _EmailBody := _EmailBody + shortstring('</tr>'#13);
 
   for i := 1 to ListView1.Items.Count do
   begin
@@ -190,32 +185,31 @@ begin
     else
       _Style := 'even';
     _EmailBody := _EmailBody +
-      ShortString(Format('<tr><td class="%s">%d</td>'#13, [_Style, i]));
+      shortstring(Format('<tr><td class="%s">%d</td>'#13, [_Style, i]));
     for j := 1 to ListView1.ColumnCount - 1 do
       _EmailBody := _EmailBody +
-        ShortString(Format('<td class="%s">%s</td>'#13,
+        shortstring(Format('<td class="%s">%s</td>'#13,
         [_Style, ListView1.Items[i - 1].SubItems[j - 1]]));
-    _EmailBody := _EmailBody + ShortString('</tr>'#13);
+    _EmailBody := _EmailBody + shortstring('</tr>'#13);
   end;
-  _EmailBody := _EmailBody + ShortString('</table><br><br>'#13);
+  _EmailBody := _EmailBody + shortstring('</table><br><br>'#13);
 
-  _EmailBody := _EmailBody + ShortString(
-    '<p class="legend">Email sent from Monitor Folder created by Stefan ARHIP, 0730290641, stefan.arhip@vard.com</p>'
-    +
+  _EmailBody := _EmailBody + shortstring(
+    '<p class="legend">Email sent from Monitor Folder created by Stefan ARHIP</p>' +
     '</body></html>');
   Email.HtmlBody := _EmailBody;
 
   Email.Configuration.Fields.Item(Cdo + 'sendusing') := SmtpSendUsing.Value;
   Email.Configuration.Fields.Item(Cdo + 'smtpserver') :=
-    ShortString(SmtpServerName.Text);
+    shortstring(SmtpServerName.Text);
   Email.Configuration.Fields.Item(Cdo + 'smtpserverport') := SmtpServerPort.Value;
   Email.Configuration.Fields.Item(Cdo + 'smtpusessl') := SmtpSsl.Checked;
   Email.Configuration.Fields.Item(Cdo + 'smtpauthenticate') :=
     SmtpAuthenticate.Checked;
   Email.Configuration.Fields.Item(Cdo + 'sendusername') :=
-    ShortString(SmtpUsername.Text);
+    shortstring(SmtpUsername.Text);
   Email.Configuration.Fields.Item(Cdo + 'sendpassword') :=
-    ShortString(SmtpPassword.Text);
+    shortstring(SmtpPassword.Text);
   Email.Configuration.Fields.Item(Cdo + 'smtpconnectiontimeout') :=
     SmtpConnectionTimeout.Value;
   Email.Configuration.Fields.Update;
