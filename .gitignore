@@ -1,0 +1,8 @@
+backup/
+lib/
+*.exe
+*.dbg
+*.dll
+*.ini
+*.png
+*.res

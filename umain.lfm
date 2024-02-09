@@ -1,0 +1,421 @@
+object fMain: TfMain
+  Left = 255
+  Height = 387
+  Top = 126
+  Width = 522
+  Caption = 'Monitor Folder'
+  ClientHeight = 387
+  ClientWidth = 522
+  OnActivate = FormActivate
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  SessionProperties = 'fsFileSizeMax.Value;meRecipients.Lines;MonitorizedFolder.Text;seFileCountMax.Value;SmtpAuthenticate.Checked;SmtpConnectionTimeout.Value;SmtpPassword.Text;SmtpSender.Text;SmtpSendUsing.Value;SmtpServerName.Text;SmtpServerPort.Value;SmtpSsl.Checked;SmtpUsername.Text'
+  LCLVersion = '3.0.0.3'
+  object StatusBar1: TStatusBar
+    Left = 0
+    Height = 23
+    Top = 364
+    Width = 522
+    Panels = <    
+      item
+        Text = '1 file'
+        Width = 100
+      end    
+      item
+        Text = '396.48 MB'
+        Width = 100
+      end    
+      item
+        Width = 50
+      end>
+    SimplePanel = False
+  end
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 364
+    Top = 0
+    Width = 522
+    ActivePage = TabSheet4
+    Align = alClient
+    TabIndex = 4
+    TabOrder = 1
+    object TabSheet1: TTabSheet
+      Caption = 'RESULT'
+      ClientHeight = 336
+      ClientWidth = 514
+      object ListView1: TListView
+        Left = 0
+        Height = 279
+        Top = 57
+        Width = 514
+        Align = alClient
+        Columns = <        
+          item
+            Alignment = taRightJustify
+            Caption = '#'
+          end        
+          item
+            Caption = 'Filename'
+            Width = 200
+          end        
+          item
+            Alignment = taRightJustify
+            Caption = 'Size [MB]'
+            Width = 80
+          end        
+          item
+            Caption = 'Modified'
+            Width = 100
+          end>
+        Items.LazData = {
+          5F00000001000000FFFFFFFFFFFFFFFFFFFFFFFF030000000100000031140000
+          00636F6E7374616E74696E2E6D6172696E2E707374060000003339362E343810
+          000000323031352E30382E33312031343A3530FFFFFFFFFFFFFFFFFFFFFFFF
+        }
+        ReadOnly = True
+        RowSelect = True
+        ScrollBars = ssAutoBoth
+        TabOrder = 0
+        ViewStyle = vsReport
+      end
+      object tbCards: TToolBar
+        Left = 0
+        Height = 57
+        Top = 0
+        Width = 514
+        ButtonHeight = 55
+        ButtonWidth = 55
+        Caption = 'tbCards'
+        Images = ImageList1
+        ShowCaptions = True
+        TabOrder = 1
+        object tbSearch: TToolButton
+          Left = 1
+          Top = 2
+          Caption = '&Check'
+          ImageIndex = 0
+          OnClick = tbSearchClick
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object tbEmail: TToolButton
+          Left = 56
+          Top = 2
+          Caption = '&Email'
+          Enabled = False
+          ImageIndex = 1
+          OnClick = tbEmailClick
+        end
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'MONITOR'
+      ClientHeight = 336
+      ClientWidth = 514
+      object Label1: TLabel
+        Left = 8
+        Height = 15
+        Top = 19
+        Width = 98
+        Caption = 'Monitorized folder'
+        ParentColor = False
+      end
+      object MonitorizedFolder: TDirectoryEdit
+        Left = 136
+        Height = 23
+        Top = 15
+        Width = 368
+        Directory = '\\sanab8.akerbraila.ro\k$\pst-uri\'
+        ShowHidden = False
+        ButtonWidth = 23
+        NumGlyphs = 1
+        Anchors = [akTop, akLeft, akRight]
+        MaxLength = 0
+        TabOrder = 0
+        Text = '\\sanab8.akerbraila.ro\k$\pst-uri\'
+      end
+      object Label2: TLabel
+        Left = 8
+        Height = 32
+        Top = 56
+        Width = 120
+        AutoSize = False
+        Caption = 'Send email if total filesize is bigger than'
+        ParentColor = False
+        WordWrap = True
+      end
+      object fsFileSizeMax: TFloatSpinEdit
+        Left = 136
+        Height = 23
+        Top = 60
+        Width = 74
+        Alignment = taRightJustify
+        TabOrder = 1
+        Value = 4.5
+      end
+      object Label3: TLabel
+        Left = 216
+        Height = 15
+        Top = 64
+        Width = 15
+        Caption = 'GB'
+        ParentColor = False
+      end
+      object Label4: TLabel
+        Left = 8
+        Height = 31
+        Top = 104
+        Width = 124
+        AutoSize = False
+        Caption = 'Send email if total filecount is bigger than'
+        ParentColor = False
+        WordWrap = True
+      end
+      object seFileCountMax: TSpinEdit
+        Left = 136
+        Height = 23
+        Top = 108
+        Width = 74
+        Alignment = taRightJustify
+        MaxValue = 32000
+        TabOrder = 2
+        Value = 100
+      end
+    end
+    object TabSheet5: TTabSheet
+      Caption = 'SENDER'
+      ClientHeight = 336
+      ClientWidth = 514
+      object Label6: TLabel
+        Left = 8
+        Height = 15
+        Top = 46
+        Width = 58
+        Caption = 'Send using'
+        ParentColor = False
+      end
+      object Label7: TLabel
+        Left = 8
+        Height = 15
+        Top = 73
+        Width = 32
+        Caption = 'Server'
+        ParentColor = False
+      end
+      object Label8: TLabel
+        Left = 8
+        Height = 15
+        Top = 100
+        Width = 22
+        Caption = 'Port'
+        ParentColor = False
+      end
+      object Label9: TLabel
+        Left = 8
+        Height = 15
+        Top = 208
+        Width = 53
+        Caption = 'Username'
+        ParentColor = False
+      end
+      object Label10: TLabel
+        Left = 8
+        Height = 15
+        Top = 235
+        Width = 50
+        Caption = 'Password'
+        ParentColor = False
+      end
+      object Label11: TLabel
+        Left = 8
+        Height = 15
+        Top = 266
+        Width = 109
+        Caption = 'Connection Timeout'
+        ParentColor = False
+      end
+      object Label12: TLabel
+        Left = 8
+        Height = 15
+        Top = 19
+        Width = 36
+        Caption = 'Sender'
+        ParentColor = False
+      end
+      object SmtpSsl: TCheckBox
+        Left = 8
+        Height = 19
+        Top = 136
+        Width = 36
+        Caption = 'SSL'
+        TabOrder = 0
+      end
+      object SmtpAuthenticate: TCheckBox
+        Left = 8
+        Height = 19
+        Top = 159
+        Width = 86
+        Caption = 'Authenticate'
+        TabOrder = 1
+      end
+      object SmtpSender: TEdit
+        Left = 136
+        Height = 23
+        Top = 16
+        Width = 201
+        TabOrder = 2
+        Text = 'smtp@osv.onmicrosoft.com'
+      end
+      object SmtpServerName: TEdit
+        Left = 136
+        Height = 23
+        Top = 70
+        Width = 201
+        TabOrder = 3
+        Text = 'sanab59.akerbraila.ro'
+      end
+      object SmtpUsername: TEdit
+        Left = 136
+        Height = 23
+        Top = 205
+        Width = 201
+        TabOrder = 4
+        Text = 'noreply@vard.com'
+      end
+      object SmtpPassword: TEdit
+        Left = 136
+        Height = 23
+        Top = 232
+        Width = 201
+        TabOrder = 5
+      end
+      object SmtpSendUsing: TSpinEdit
+        Left = 136
+        Height = 23
+        Top = 43
+        Width = 201
+        MaxValue = 65000
+        TabOrder = 6
+        Value = 2
+      end
+      object SmtpServerPort: TSpinEdit
+        Left = 136
+        Height = 23
+        Top = 96
+        Width = 202
+        MaxValue = 65000
+        TabOrder = 7
+        Value = 591
+      end
+      object SmtpConnectionTimeout: TSpinEdit
+        Left = 136
+        Height = 23
+        Top = 258
+        Width = 50
+        MaxValue = 180
+        MinValue = 30
+        TabOrder = 8
+        Value = 60
+      end
+    end
+    object TabSheet3: TTabSheet
+      Caption = 'RECIPIENTS'
+      ClientHeight = 336
+      ClientWidth = 514
+      object Label5: TLabel
+        Left = 8
+        Height = 15
+        Top = 19
+        Width = 47
+        Caption = 'Email list'
+        ParentColor = False
+      end
+      object meRecipients: TMemo
+        Left = 136
+        Height = 306
+        Top = 16
+        Width = 368
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        Lines.Strings = (
+          'stefan.arhip@vard.com'
+        )
+        TabOrder = 0
+      end
+    end
+    object TabSheet4: TTabSheet
+      Caption = 'HELP'
+      ClientHeight = 336
+      ClientWidth = 514
+      object laCPUTarget: TLabel
+        Left = 40
+        Height = 15
+        Top = 128
+        Width = 98
+        Caption = 'Target: undetected'
+        ParentColor = False
+      end
+      object laFPC: TLabel
+        Left = 40
+        Height = 15
+        Top = 104
+        Width = 87
+        Caption = 'FPC: undetected'
+        ParentColor = False
+      end
+      object laLazarus: TLabel
+        Left = 40
+        Height = 15
+        Top = 80
+        Width = 105
+        Caption = 'Lazarus: undetected'
+        ParentColor = False
+      end
+      object Label13: TLabel
+        Left = 12
+        Height = 50
+        Top = 16
+        Width = 254
+        Caption = 'Monitor Folder'
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -37
+        Font.Name = 'Segoe UI Semibold'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+    end
+  end
+  object IniPropStorage1: TIniPropStorage
+    StoredValues = <>
+    IniFileName = 'mofo.ini'
+    Left = 408
+    Top = 264
+  end
+  object ImageList1: TImageList
+    Height = 32
+    Width = 32
+    Left = 408
+    Top = 208
+    Bitmap = {
+      4C7A020000002000000020000000DB0100000000000078DAED57B16AC330100D
+      040CFD8040C010FA2919DCA9D0C950C8D42953868E812E091402F98940BEC490
+      A953A0DF10F0A82D6008A4129CC2459564E924372DD5C1C3C4D6BDF7EC3BFB94
+      5E2F450A7B14459173BC71541C078E331C2B389F77A49B71AC398EA069C211D6
+      6511B5071C1F2DBA2AC4FA41A4FB56B53F394AF9ACA126259C573D6481FA2BC4
+      D770BC9B38C1ABB87E4239ABC05E6B10D7CC316FA6781E11F5978867E799BB43
+      B94BA23EE69878E64EA8DE11478D387242ED646E4DD4C7B5CF08EFCDA507FEE8
+      FD5791EA5F11F5E791FA7F4ED41F293D3075CC9BC678FF816BAD708919D737AC
+      EDC375EC79DBC1F77F0FDFFB21AC19C2EFBD660E9D7C7B27D2FC533D3C077AB8
+      835A342D5AE2FA569941513C68F63FF2FB50ABFB1FA847271E3CBC9A3C94BFC0
+      C3E38D3DD4BD1F0C8D87C30DF6EE4FD0AB020FE9DF4C8A142952A430CC8BB161
+      4F190AC13976D0671CAF1C9B88DA1BE0640EFA32670108D5BEE2F1D0BFF24DD0
+      D53E474FFD4BDD3C3D30531F11F4AD7CBE7E89FA67C7BE6CAD5780BEF4706FE8
+      CB055CB3D629F0FE5FE088EF133F17BC26A6BE8E57D659ED0BAB0782BE8D8F59
+      CE6B733CF55B9FA763BD28FA21DA460E47FD18DA5A0F8EF32796F6370F8EF397
+      75307F99CBFC4D9122C5FF892FA4F814F4
+    }
+  end
+end
